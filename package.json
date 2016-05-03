@@ -1,6 +1,6 @@
 {
   "name": "meshblu-core-task-enqueue-jobs-for-forward-broadcast-received",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Meshblu core task meshblu-core-task-enqueue-jobs-for-forward-broadcast-received",
   "keywords": [
     "meshblu",
