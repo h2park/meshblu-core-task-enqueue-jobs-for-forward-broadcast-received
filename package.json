@@ -1,0 +1,53 @@
+{
+  "name": "meshblu-core-task-enqueue-jobs-for-forward-broadcast-received",
+  "version": "1.0.0",
+  "description": "Meshblu core task meshblu-core-task-enqueue-jobs-for-forward-broadcast-received",
+  "keywords": [
+    "meshblu",
+    "core",
+    "iot",
+    "task"
+  ],
+  "homepage": "https://github.com/octoblu/meshblu-core-task-enqueue-jobs-for-forward-broadcast-received",
+  "bugs": "https://github.com/octoblu/meshblu-core-task-enqueue-jobs-for-forward-broadcast-received/issues",
+  "author": {
+    "name": "Octoblu",
+    "url": "https://github.com/octoblu"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/octoblu/meshblu-core-task-enqueue-jobs-for-forward-broadcast-received.git"
+  },
+  "scripts": {
+    "test": "istanbul cover _mocha -- -R spec --require coffee-coverage/register-istanbul"
+  },
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "coffee-script": "^1.10.0",
+    "lodash": "^4.6.1"
+  },
+  "devDependencies": {
+    "@octoblu/redis-ns": "^1.2.2",
+    "chai": "^3.5.0",
+    "chai-subset": "^1.2.2",
+    "coffee-coverage": "^0.7.0",
+    "coffee-script": "^1.10.0",
+    "fakeredis": "^1.0.3",
+    "istanbul": "^0.4.3",
+    "meshblu-core-datastore": "^4.4.2",
+    "meshblu-core-job-manager": "^3.6.0",
+    "mocha": "^2.4.5",
+    "mocha-istanbul": "^0.2.0",
+    "mongojs": "^2.4.0",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0",
+    "uuid": "^2.0.2"
+  },
+  "peerDependencies": {},
+  "engines": {
+    "node": ">=5.0.0",
+    "npm": ">=2.10.0"
+  },
+  "license": "MIT"
+}
