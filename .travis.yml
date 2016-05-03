@@ -1,6 +1,8 @@
 language: node_js
 node_js:
 - '5'
+services:
+- mongodb
 addons:
   code_climate:
     repo_token: "4228926b238651502eb3e6c35a969cd206c485ea3dce1dc3d25169ba255db76f"
