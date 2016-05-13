@@ -10,8 +10,12 @@ EnqueueJobsForForwardBroadcastReceived = require '../'
 
 describe 'EnqueueJobsForForwardBroadcastReceived', ->
   beforeEach (done) ->
-    @devices = mongojs('meshblu-core-task-enqueue-jobs-for-forward-broadcast-received', ['devices']).devices
-    @devices.remove done
+    database = mongojs 'meshblu-core-task-enqueue-jobs-for-forward-broadcast-received', ['devices']
+    @datastore = new Datastore
+      database: database
+      collection: 'devices'
+
+    database.devices.remove done
 
   beforeEach ->
     @redisKey = uuid.v1()
@@ -20,13 +24,10 @@ describe 'EnqueueJobsForForwardBroadcastReceived', ->
       timeoutSeconds: 1
 
   beforeEach ->
-    datastore = new Datastore
-      collection: 'devices'
-      database: mongojs('meshblu-core-task-enqueue-jobs-for-forward-broadcast-received')
 
     client = new RedisNS 'ns', redis.createClient(@redisKey)
     @sut = new EnqueueJobsForForwardBroadcastReceived {
-      datastore:         datastore
+      datastore:         @datastore
       jobManager:        new JobManager {client: client, timeoutSeconds: 1}
       uuidAliasResolver: {resolve: (uuid, callback) -> callback(null, uuid)}
     }
@@ -34,7 +35,7 @@ describe 'EnqueueJobsForForwardBroadcastReceived', ->
   describe '->do', ->
     describe 'with a device with no forward', ->
       beforeEach (done) ->
-        @devices.insert {
+        @datastore.insert {
           uuid: 'subscriber'
         }, done
 
@@ -60,7 +61,7 @@ describe 'EnqueueJobsForForwardBroadcastReceived', ->
 
     describe 'with a device with one forward', ->
       beforeEach (done) ->
-        @devices.insert {
+        @datastore.insert {
           uuid: 'subscriber'
           meshblu:
             forwarders:
@@ -233,7 +234,7 @@ describe 'EnqueueJobsForForwardBroadcastReceived', ->
 
     describe 'with a device with no forwards, but a webhook', ->
       beforeEach (done) ->
-        @devices.insert {
+        @datastore.insert {
           uuid: 'subscriber'
           meshblu:
             forwarders:

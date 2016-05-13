@@ -33,13 +33,15 @@ class EnqueueJobsForForwardBroadcastReceived
     return callback new Error('Missing last hop') unless lastHop?
     {from, to} = lastHop
 
-    @_resolveUuids {from, to, uuid}, (error, results) =>
+    @_resolveUuids {from, to, uuid}, (error, {from, to, uuid}) =>
       return callback error if error?
-
-      {from, to, uuid} = results
       return callback() unless from == to
 
-      @datastore.findOne {uuid}, (error, device) =>
+      projection =
+        uuid: true
+        'meshblu.forwarders': true
+
+      @datastore.findOne {uuid}, projection, (error, device) =>
         return callback error if error?
 
         forwarders = _.get device.meshblu?.forwarders, 'broadcast.received'
