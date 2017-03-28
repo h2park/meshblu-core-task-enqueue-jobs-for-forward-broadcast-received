@@ -23,12 +23,13 @@ describe 'EnqueueJobsForForwardBroadcastReceived', ->
     @jobManager = new JobManager
       client: new RedisNS 'ns', redis.createClient(@redisKey)
       timeoutSeconds: 1
+      jobLogSampleRate: 1
 
   beforeEach ->
     client = new RedisNS 'ns', redis.createClient(@redisKey)
     @sut = new EnqueueJobsForForwardBroadcastReceived {
-      datastore:         @datastore
-      jobManager:        new JobManager {client: client, timeoutSeconds: 1}
+      @datastore
+      jobManager: new JobManager {client,timeoutSeconds:1,jobLogSampleRate:1}
       uuidAliasResolver: {resolve: (uuid, callback) -> callback(null, uuid)}
     }
 
