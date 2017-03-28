@@ -1,11 +1,12 @@
+{beforeEach, describe, it} = global
+{expect}   = require 'chai'
 redis      = require 'fakeredis'
 Datastore  = require 'meshblu-core-datastore'
 JobManager = require 'meshblu-core-job-manager'
 mongojs    = require 'mongojs'
 RedisNS    = require '@octoblu/redis-ns'
 uuid       = require 'uuid'
-{beforeEach, describe, it} = global
-{expect}                   = require 'chai'
+
 EnqueueJobsForForwardBroadcastReceived = require '../'
 
 describe 'EnqueueJobsForForwardBroadcastReceived', ->
@@ -24,7 +25,6 @@ describe 'EnqueueJobsForForwardBroadcastReceived', ->
       timeoutSeconds: 1
 
   beforeEach ->
-
     client = new RedisNS 'ns', redis.createClient(@redisKey)
     @sut = new EnqueueJobsForForwardBroadcastReceived {
       datastore:         @datastore
